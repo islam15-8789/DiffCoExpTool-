@@ -18,10 +18,7 @@ suppressPackageStartupMessages({
   library(tidyr)
   
   if (!requireNamespace("DGCA", quietly = TRUE)) {
-    if (!requireNamespace("BiocManager", quietly = TRUE)) {
-      install.packages("BiocManager")
-    }
-    BiocManager::install("DGCA")
+    install.packages("DGCA")
   }
   library(DGCA)
   
@@ -92,3 +89,4 @@ write_tsv(formatted_results, output_file_path)
 
 # Print path to output file
 cat("Results saved to:", output_file_path, "\n")
+

@@ -1,18 +1,18 @@
 # Use an official R base image
-FROM r-base:latest
+FROM r-base:4.0.5
+
 
 # Set the maintainer label
 LABEL maintainer="yourname@example.com"
 
 # Install Linux dependencies if any are needed (uncomment if needed)
-# RUN apt-get update && apt-get install -y \
-#    libcurl4-openssl-dev \
-#    libssl-dev \
-#    libxml2-dev \
-#    libudunits2-dev \
-#    libgdal-dev \
-#    libgeos-dev \
-#    libproj-dev
+# Install necessary Linux dependencies
+RUN apt-get update && apt-get install -y \
+    libcurl4-openssl-dev \
+    libssl-dev \
+    libxml2-dev
+
+
 
 # Install R packages
 RUN R -e "install.packages(c('dplyr', 'readr', 'BiocManager', 'optparse', 'DGCA'), dependencies=TRUE)"
