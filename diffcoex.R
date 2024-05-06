@@ -12,6 +12,11 @@ suppressPackageStartupMessages({
   }
   library(readr)
   
+  if (!requireNamespace("tidyr", quietly = TRUE)) {
+    install.packages("tidyr")
+  }
+  library(tidyr)
+  
   if (!requireNamespace("DGCA", quietly = TRUE)) {
     if (!requireNamespace("BiocManager", quietly = TRUE)) {
       install.packages("BiocManager")
@@ -73,18 +78,17 @@ ddcor_results <- ddcorAll(inputMat = combined_data, design = design_matrix, comp
 
 # Transform ddcor_results to match the desired output format
 formatted_results <- ddcor_results %>%
-  select(Gene1, Gene2, condition1_cor, condition1_pVal, condition2_cor, condition2_pVal) %>%
-  mutate(
-    target = Gene1,
-    regulator = Gene2,
-    condition = paste("condition1"),
-    weight = condition1_cor
-  ) %>%
-  select(target, regulator, condition, weight)
+  select(Gene1, Gene2, condition1_cor, condition2_cor) %>%
+  pivot_longer(cols = c("condition1_cor", "condition2_cor"),
+               names_to = "Condition", 
+               values_to = "Weight") %>%
+  rename(Target = Gene1, Regulator = Gene2)
 
 # Save the reformatted results as a TSV file
 output_file_path <- file.path(args$output_path, "network.tsv")
 write_tsv(formatted_results, output_file_path)
+
+
 
 # Print path to output file
 cat("Results saved to:", output_file_path, "\n")
