@@ -2,29 +2,10 @@
 
 # Load necessary libraries
 suppressPackageStartupMessages({
-  if (!requireNamespace("dplyr", quietly = TRUE)) {
-    install.packages("dplyr")
-  }
   library(dplyr)
-  
-  if (!requireNamespace("readr", quietly = TRUE)) {
-    install.packages("readr")
-  }
   library(readr)
-  
-  if (!requireNamespace("tidyr", quietly = TRUE)) {
-    install.packages("tidyr")
-  }
   library(tidyr)
-  
-  if (!requireNamespace("DGCA", quietly = TRUE)) {
-    install.packages("DGCA")
-  }
   library(DGCA)
-  
-  if (!requireNamespace("optparse", quietly = TRUE)) {
-    install.packages("optparse")
-  }
   library(optparse)
 })
 
