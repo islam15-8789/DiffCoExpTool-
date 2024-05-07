@@ -29,13 +29,13 @@ RUN R -e "install.packages('https://cran.r-project.org/src/contrib/Archive/DGCA/
 RUN R -e "stopifnot(require(DGCA))"
 
 # Copy the R script into the container
-COPY diffcoex.R /usr/local/src/scripts/diffcoex.R
+COPY diffcorr.R /usr/local/src/scripts/diffcorr.R
 
 # Make the R script executable
-RUN chmod +x /usr/local/src/scripts/diffcoex.R
+RUN chmod +x /usr/local/src/scripts/diffcorr.R
 
 # Set the working directory to the scripts directory
 WORKDIR /usr/local/src/scripts
 
 # Set entrypoint to Rscript
-ENTRYPOINT ["Rscript", "diffcoex.R"]
+ENTRYPOINT ["Rscript", "diffcorr.R"]
