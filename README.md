@@ -12,16 +12,16 @@ If you find this tool useful in your research, please cite this publication.
 
 ## How to Use
 
-### Running the Tool with Docker
-
-You can use Docker to easily run this tool without worrying about dependencies.
-
 #### Clone the repository and navigate to the directory
 
 ```bash
 git clone git@github.com:islam15-8789/diff-coexp-tool.git \
 && cd diff-coexp-tool
 ```
+
+#### Running the Tool with Docker
+
+You can use Docker to easily run this tool without worrying about dependencies.
 
 #### Build the Docker Image
 
