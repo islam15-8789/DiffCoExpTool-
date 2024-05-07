@@ -26,13 +26,13 @@ You can use Docker to easily run this tool without worrying about dependencies.
 #### Build the Docker Image
 
 ```bash
-docker build -t diffcor-tool .
+docker build -t diffcorr-tool .
 ```
 
 #### Run the Docker Container
 
 ```bash
-docker run -v /path/to/data:/data diffcor-tool --input_file_1 /data/input1.tsv --input_file_2 /data/input2.tsv --output_path /data
+docker run -v /path/to/data:/data diffcorr-tool --input_file_1 /data/input1.tsv --input_file_2 /data/input2.tsv --output_path /data
 ```
 
 Replace `/path/to/data` with the directory containing your input files and where you want the output to be saved.
@@ -43,7 +43,7 @@ Dependencies: R packages `dplyr`, `readr`, `tidyr`, `DGCA`, `optparse`.
 Ensure you have the necessary R packages installed. You can run the tool directly in R with the following command:
 
 ```bash
-Rscript diffcoex.R --input_file_1 path/to/input1.tsv --input_file_2 path/to/input2.tsv --output_path path/to/output
+Rscript diffcorr.R --input_file_1 path/to/input1.tsv --input_file_2 path/to/input2.tsv --output_path path/to/output
 ```
 
 ### Input file format specification:
@@ -76,7 +76,7 @@ The output file `network.tsv` contains the differential correlation results with
 Suppose you have two input files `normal.tsv` and `cancer.tsv` in the current directory. To run the tool, use the following command:
 
 ```bash
-docker run -v /path/to/data:/data diffcor-tool --input_file_1 /data/normal.tsv --input_file_2 /data/cancer.tsv --output_path /data
+docker run -v /path/to/data:/data diffcorr-tool --input_file_1 /data/normal.tsv --input_file_2 /data/cancer.tsv --output_path /data
 ```
 
 ### References
