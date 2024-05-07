@@ -37,5 +37,5 @@ RUN chmod +x /usr/local/src/scripts/diffcoex.R
 # Set the working directory to the scripts directory
 WORKDIR /usr/local/src/scripts
 
-# Default command to run when starting the container
-CMD ["Rscript", "diffcoex.R", "--help"]
+# Set entrypoint to Rscript
+ENTRYPOINT ["Rscript", "diffcoex.R"]

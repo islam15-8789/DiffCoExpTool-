@@ -12,14 +12,14 @@ If you find this tool useful in your research, please cite this publication.
 
 ## How to Use
 
-#### Clone the repository and navigate to the directory
+### Clone the repository and navigate to the directory
 
 ```bash
 git clone git@github.com:islam15-8789/diff-coexp-tool.git \
 && cd diff-coexp-tool
 ```
 
-#### Running the Tool with Docker
+### 1. Running the Tool with Docker
 
 You can use Docker to easily run this tool without worrying about dependencies.
 
@@ -37,12 +37,25 @@ docker run -v /path/to/data:/data diffcor-tool --input_file_1 /data/input1.tsv -
 
 Replace `/path/to/data` with the directory containing your input files and where you want the output to be saved.
 
-### Input Files
+### 2. Running the Tool Directly in R
 
-Each input file should be a TSV file with the following structure:
+Dependencies: R packages `dplyr`, `readr`, `tidyr`, `DGCA`, `optparse`.
+Ensure you have the necessary R packages installed. You can run the tool directly in R with the following command:
 
-- The first column should be the gene names (header `Gene`).
-- The other columns should be expression values for different samples.
+```bash
+Rscript diffcoex.R --input_file_1 path/to/input1.tsv --input_file_2 path/to/input2.tsv --output_path path/to/output
+```
+
+### Input file format specification:
+- `--input_file_1`: Path to tab-separated file that contains the gene expression dataframe for condition 1:
+    - Rows correspond to gene names and columns to cells 
+    - First column is named **Gene** and contains the gene names
+    - Each entry is a normalized gene expression value
+- `--input_file_2`: Path to tab-separated file that contains the gene expression dataframe for condition 2:
+    - Rows correspond to gene names and columns to cells 
+    - First column is named **Gene** and contains the gene names
+    - Each entry is a normalized gene expression value
+- `--output_path`: String that contains the path to the output folder. Has to exist at time of execution.
 
 ### Output File
 
@@ -52,6 +65,11 @@ The output file `network.tsv` contains the differential correlation results with
 - **Regulator:** The second gene.
 - **Condition:** The condition (either `condition1_cor` or `condition2_cor`).
 - **Weight:** The correlation value.
+
+## Interpretation of the output
+- The nodes correspond to the genes.
+- Each edge represents diff correlation between a pair of genes in either condition 1 or condition 2.
+
 
 ### Example
 
