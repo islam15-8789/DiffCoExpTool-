@@ -67,18 +67,20 @@ The output file `network.tsv` contains the differential correlation results with
 - **Weight:** The correlation value.
 
 ## Interpretation of the output
+
 - The nodes correspond to the genes.
 - Each edge represents diff correlation between a pair of genes in either condition 1 or condition 2.
 
 
-### Example
+### Execution instructions using example data
 
-Suppose you have two input files `normal.tsv` and `cancer.tsv` in the current directory. To run the tool, use the following command:
+I have provided two reference datasets from the paper[2], consisting of two input files, `BRCA_normal.tsv` and `BRCA_tumor.tsv`. The dataset contains 2,000 genes and 113 samples from the TCGA database. Additionally, both of the datasets are prepossed and normalized. To run the tool using this dataset, use the following command:
 
 ```bash
-docker run -v /path/to/data:/data diffcorr-tool --input_file_1 /data/normal.tsv --input_file_2 /data/cancer.tsv --output_path /data
+docker run -v ./data:/data diffcorr-tool --input_file_1 /data/BRCA_normal.tsv --input_file_2 /data/BRCA_tumor.tsv --output_path /data
 ```
 
 ### References
 
 1. [Andrew T. McKenzie, et al, DGCA: A comprehensive R package for Differential Gene Correlation Analysis](https://bmcsystbiol.biomedcentral.com/articles/10.1186/s12918-016-0349-1)
+2.[Sumanta Ray, et al, CODC: a Copula-based model to identify differential coexpression](https://www.nature.com/articles/s41540-020-0137-9)
