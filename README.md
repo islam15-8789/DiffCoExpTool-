@@ -15,8 +15,8 @@ If you find this tool useful in your research, please cite this publication.
 ### Clone the repository and navigate to the directory
 
 ```bash
-git clone git@github.com:islam15-8789/diff-coexp-tool.git \
-&& cd diff-coexp-tool
+git clone git@github.com:islam15-8789/diff-corr-tool.git \
+&& cd diff-corr-tool
 ```
 
 ### 1. Running the Tool with Docker
