@@ -1,6 +1,6 @@
 ## Overview
 
-**DiffCorrTool** is a command-line interface built on the DGCA (Differential Gene Correlation Analysis) R package, designed to facilitate the exploration of differential gene co-expression across two distinct biological conditions. Drawing on the robust methodologies described in the DGCA: A comprehensive R package for Differential Gene Correlation Analysis[1].
+**DiffCorrTool** is a command-line interface built on the DGCA (Differential Gene Correlation Analysis) R package, The analysis focuses on calculating differential correlations between gene pairs across two different conditions using Z-score differences.This method helps in understanding the dynamic relationships among genes under various biological conditions. Drawing on the robust methodologies described in the DGCA: A comprehensive R package for Differential Gene Correlation Analysis[1].
 
 If you find this tool useful in your research, please cite this publication.
 
@@ -11,6 +11,10 @@ If you find this tool useful in your research, please cite this publication.
 - **Output:** A TSV file containing the differential correlation network.
 
 ## How to Use
+
+### Prerequisites
+
+- Knowledge of R 
 
 ### Clone the repository and navigate to the directory
 
@@ -64,7 +68,7 @@ The output file `network.tsv` contains the differential correlation results with
 - **Target:** The first gene.
 - **Regulator:** The second gene.
 - **Condition:** The condition (either `condition1_cor` or `condition2_cor`).
-- **Weight:** The correlation value.
+- **Weight:** The correlation value.Here, `Weight` represents the Z-score difference between the two conditions for each gene pair.
 
 ## Interpretation of the output
 
