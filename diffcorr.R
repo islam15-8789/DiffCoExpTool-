@@ -56,9 +56,10 @@ ddcor_results <- ddcorAll(inputMat = combined_data, design = design_matrix, comp
 
 # Transform ddcor_results to match the desired output format
 formatted_results <- ddcor_results %>%
-  select(Gene1, Gene2, zScoreDiff) %>%
-  mutate(Condition = "zScoreDiff", Weight = zScoreDiff) %>%
-  select(-zScoreDiff) %>%
+  select(Gene1, Gene2, condition1_cor, condition2_cor) %>%
+  pivot_longer(cols = c("condition1_cor", "condition2_cor"),
+               names_to = "Condition", 
+               values_to = "Weight") %>%
   rename(Target = Gene1, Regulator = Gene2)
 
 # Save the reformatted results as a TSV file
