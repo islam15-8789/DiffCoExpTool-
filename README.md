@@ -22,7 +22,7 @@ To run the tool using Docker, ensure Docker is installed on your system and foll
    ```
 3. Run the tool using the Docker container:
    ```bash
-   docker run --rm -v /<path_to_your_data>:/data dgca-tool --input_file_1 /data/condition1.tsv --input_file_2 /data/condition2.tsv --output_path /data
+   docker run --rm -v /<path_to_your_data>:/data dgca-tool dgca.R --input_file_1 /data/condition1.tsv --input_file_2 /data/condition2.tsv --output_path /data
    ```
 
 Replace <path_to_your_data> with the directory path where the datasets are kept.
@@ -46,16 +46,16 @@ Replace <path_to_your_data> with the directory path where the datasets are kept.
 To run the tool, use the following command:
 ```bash
 # 500 genes
-Rscript dgca.R --input_file_1 ../../data/reference_datasets/500_genes/out_CD8_exhausted.tsv --input_file_2 ../../data/reference_datasets/500_genes/out_Macrophages.tsv -o ./
+Rscript dgca.R --input_file_1 ../../data/reference_datasets/500_genes/out_CD8_exhausted.tsv --input_file_2 ../../data/reference_datasets/500_genes/out_Macrophages.tsv --output_path ./
 
 # 1000 genes
-Rscript dgca.R --input_file_1 ../../reference_datasets/1000_genes/out_CD8_exhausted.tsv --input_file_2 ../../reference_datasets/1000_genes/out_Macrophages.tsv -o ./
+Rscript dgca.R --input_file_1 ../../reference_datasets/1000_genes/out_CD8_exhausted.tsv --input_file_2 ../../reference_datasets/1000_genes/out_Macrophages.tsv --output_path ./
 
 # 2500 genes
-Rscript dgca.R --input_file_1 ../../reference_datasets/2500_genes/out_CD8_exhausted.tsv --input_file_2 ../../reference_datasets/2500_genes/out_Macrophages.tsv -o ./
+Rscript dgca.R --input_file_1 ../../reference_datasets/2500_genes/out_CD8_exhausted.tsv --input_file_2 ../../reference_datasets/2500_genes/out_Macrophages.tsv --output_path ./
 
 # Full Input
-Rscript dgca.R --input_file_1 ../../reference_datasets/full_input/out_CD8_exhausted.tsv --input_file_2 ../../reference_datasets/full_input/out_Macrophages.tsv -o ./
+Rscript dgca.R --input_file_1 ../../reference_datasets/full_input/out_CD8_exhausted.tsv --input_file_2 ../../reference_datasets/full_input/out_Macrophages.tsv --output_path ./
 ```
 Replace the paths with the actual locations of your input files and desired output directory.
 

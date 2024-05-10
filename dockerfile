@@ -1,5 +1,5 @@
 # Use an R base image with version 4.0.5 from Rocker
-FROM --platform=linux/amd64 rocker/r-ver:4.0.5
+FROM bioconductor/bioconductor_docker:RELEASE_3_17
 
 # Install necessary Linux dependencies
 RUN apt-get update && apt-get install -y \
@@ -14,14 +14,17 @@ COPY install_dependencies.R /usr/local/src/scripts/install_dependencies.R
 # Run the install dependencies script
 RUN Rscript /usr/local/src/scripts/install_dependencies.R
 
-# Copy the R script into the container
+# Copy the R scripts into the container
 COPY dgca.R /usr/local/src/scripts/dgca.R
+COPY enrichment_map.R /usr/local/src/scripts/enrichment_map.R
 
-# Make the R script executable
+# Make the R scripts executable
 RUN chmod +x /usr/local/src/scripts/dgca.R
+RUN chmod +x /usr/local/src/scripts/enrichment_map.R
 
 # Set the working directory to the scripts directory
 WORKDIR /usr/local/src/scripts
 
-# Set entrypoint to Rscript
-ENTRYPOINT ["Rscript", "dgca.R"]
+# Set entrypoint to allow general Rscript execution
+ENTRYPOINT ["Rscript"]
+
