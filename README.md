@@ -5,7 +5,7 @@ This tool is a command-line utility designed as a wrapper around the DGCA packag
 
 ## Reference
 For detailed methodology and application, Please find the article here:
-McKenzie, A.T., Katsyv, I., Song, WM. et al. DGCA: A comprehensive R package for Differential Gene Correlation Analysis. BMC System Biology, Article num: 106 (2016). https://bmcsystbiol.biomedcentral.com/articles/10.1186/s12918-016-0349-1.
+McKenzie, A.T., Katsyv, I., Song, WM. et al. DGCA: A comprehensive R package for Differential Gene Correlation Analysis. BMC System Biology, 106 (2016). https://bmcsystbiol.biomedcentral.com/articles/10.1186/s12918-016-0349-1.
 
 ## Installation Instructions
 
@@ -25,7 +25,7 @@ To run the tool using Docker, ensure Docker is installed on your system and foll
    docker run --rm -v /<path_to_your_data>:/data dgca-tool --input_file_1 /data/condition1.tsv --input_file_2 /data/condition2.tsv --output_path /data
    ```
 
-Replace <path_to_your_data> with the directory address where the datasets are kept.
+Replace <path_to_your_data> with the directory path where the datasets are kept.
 
 ### Option 2: Local Installation (Using R)
 1. Clone the repository:
@@ -39,13 +39,23 @@ Replace <path_to_your_data> with the directory address where the datasets are ke
    ```
 3. Run the tool:
    ```bash
-   Rscript diffcoex.R --input_file_1 <path_to_condition1_file> --input_file_2 <path_to_condition2_file> --output_path <output_directory>
+   Rscript dgca.R --input_file_1 <path_to_condition1_file> --input_file_2 <path_to_condition2_file> --output_path <output_directory>
    ```
 
-## Execution Instructions
+## Instructions to execute the reference data
 To run the tool, use the following command:
 ```bash
-Rscript diffcoex.R --input_file_1 path/to/condition1_data.tsv --input_file_2 path/to/condition2_data.tsv --output_path path/to/output
+# 500 genes
+Rscript dgca.R --input_file_1 ../../data/reference_datasets/500_genes/out_CD8_exhausted.tsv --input_file_2 ../../data/reference_datasets/500_genes/out_Macrophages.tsv -o ./
+
+# 1000 genes
+Rscript dgca.R --input_file_1 ../../reference_datasets/1000_genes/out_CD8_exhausted.tsv --input_file_2 ../../reference_datasets/1000_genes/out_Macrophages.tsv -o ./
+
+# 2500 genes
+Rscript dgca.R --input_file_1 ../../reference_datasets/2500_genes/out_CD8_exhausted.tsv --input_file_2 ../../reference_datasets/2500_genes/out_Macrophages.tsv -o ./
+
+# Full Input
+Rscript dgca.R --input_file_1 ../../reference_datasets/full_input/out_CD8_exhausted.tsv --input_file_2 ../../reference_datasets/full_input/out_Macrophages.tsv -o ./
 ```
 Replace the paths with the actual locations of your input files and desired output directory.
 
