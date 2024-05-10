@@ -1,7 +1,7 @@
 # Differential Gene Correlation Analysis (DGCA) Tool
 
 ## Brief Description
-This tool is a command-line utility designed as a wrapper around the DGCA package, facilitating Differential Gene Correlation Analysis between two conditions. It is designed to identifying significant changes in gene correlation across different biological conditions, thus providing deeper understanding of gene regulatory dynamics.
+This tool is a command-line utility designed as a wrapper around the DGCA package, facilitating Differential Gene Correlation Analysis between two conditions. It is designed to identifying significant changes in gene correlation across different biological conditions, thus providing deeper understanding of gene regulatory dynamics and advanced biological insights .
 
 ## Reference
 For detailed methodology and application, Please find the article here:
