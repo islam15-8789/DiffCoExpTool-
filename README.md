@@ -1,90 +1,71 @@
-## Overview
+# Differential Gene Correlation Analysis (DGCA) Tool
 
-**DiffCorrTool** is a command-line interface built on the DGCA (Differential Gene Correlation Analysis) R package, designed to help us in understanding the dynamic relationships among genes under various biological conditions. Drawing on the robust methodologies described in the DGCA: A comprehensive R package for Differential Gene Correlation Analysis[1].
+## Brief Description
+This tool is a command-line utility designed as a wrapper around the DGCA package, facilitating Differential Gene Correlation Analysis between two conditions. It aids in identifying significant changes in gene correlation across different biological conditions, supporting advanced biological insights into gene regulatory mechanisms.
 
-If you find this tool useful in your research, please cite this publication.
+## Reference
+For detailed methodology and application, please refer to:
+McKenzie, A.T., Katsyv, I., Song, WM. et al. DGCA: A comprehensive R package for Differential Gene Correlation Analysis. BMC Syst Biol 10, 106 (2016). https://doi.org/10.1186/s12918-016-0349-1.
 
+## Installation Instructions
 
-## Features
+### Option 1: Docker Installation
+To run the tool using Docker, ensure Docker is installed on your system and follow these steps:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/dgca-tool.git
+   cd dgca-tool
+   ```
+2. Build the Docker image:
+   ```bash
+   docker build -t dgca-tool .
+   ```
+3. Run the tool using the Docker container:
+   ```bash
+   docker run --rm -v ./data:/data dgca-tool --input_file_1 /data/BRCA_normal_subset.tsv --input_file_2 /data/BRCA_tumor_subset.tsv --output_path /data
+   ```
 
-- **Input:** Two TSV files containing gene expression data for two conditions.
-- **Output:** A TSV file containing the differential correlation network.
+### Option 2: Local Installation (Using R)
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/dgca-tool.git
+   cd dgca-tool
+   ```
+2. Install the required R packages:
+   ```bash
+   Rscript install_dependencies.R
+   ```
+3. Run the tool:
+   ```bash
+   Rscript diffcoex.R --input_file_1 <path_to_condition1_file> --input_file_2 <path_to_condition2_file> --output_path <output_directory>
+   ```
 
-## How to Use
-
-### Prerequisites
-
-- Knowledge of R 
-
-### Clone the repository and navigate to the directory
-
+## Execution Instructions
+To run the tool, use the following command:
 ```bash
-git clone git@github.com:islam15-8789/diff-corr-tool.git \
-&& cd diff-corr-tool
+Rscript diffcoex.R --input_file_1 path/to/condition1_data.tsv --input_file_2 path/to/condition2_data.tsv --output_path path/to/output
 ```
+Replace the paths with the actual locations of your input files and desired output directory.
 
-### 1. Running the Tool with Docker
+## Parameters
+- `--input_file_1`: Path to the TSV file containing gene expression data for the first condition.
+- `--input_file_2`: Path to the TSV file containing gene expression data for the second condition.
+- `--output_path`: Output path where the results will be saved. The results file will be named 'network.tsv'.
 
-You can use Docker to easily run this tool without worrying about dependencies.
+## Input File Format
+The input files should be TSV (Tab-Separated Values) format containing gene expression data. Each file must have genes as rows and samples as columns for each condition.
 
-#### Build the Docker Image
+## Output File Format
+| Target  | Regulator | Condition    | Weight_1      | Weight_2   | Weight_3     | Weight_4     | Weight_5 |
+|---------|-----------|--------------|---------------|------------|--------------|--------------|----------|
+| CACYBP  | NACA      | condition1   | -0.070261455  | 0.67509118 | 1.100991e-24 | 1.100991e-24 | 0/+      |
+| CACYBP  | NACA      | condition2   | 0.9567267     | 0          | 1.100991e-24 | 1.100991e-24 | 0/+      |
 
-```bash
-docker build -t diffcorr-tool .
-```
-
-#### Run the Docker Container
-
-```bash
-docker run -v /path/to/data:/data diffcorr-tool --input_file_1 /data/input1.tsv --input_file_2 /data/input2.tsv --output_path /data
-```
-
-Replace `/path/to/data` with the directory containing your input files and where you want the output to be saved.
-
-### 2. Running the Tool Directly in R
-
-Dependencies: R packages `dplyr`, `readr`, `tidyr`, `DGCA`, `optparse`.
-Ensure you have the necessary R packages installed. You can run the tool directly in R with the following command:
-
-```bash
-Rscript diffcorr.R --input_file_1 path/to/input1.tsv --input_file_2 path/to/input2.tsv --output_path path/to/output
-```
-
-### Input file format specification:
-- `--input_file_1`: Path to tab-separated file that contains the gene expression dataframe for condition 1:
-    - Rows correspond to gene names and columns to cells 
-    - First column is named **Gene** and contains the gene names
-    - Each entry is a normalized gene expression value
-- `--input_file_2`: Path to tab-separated file that contains the gene expression dataframe for condition 2:
-    - Rows correspond to gene names and columns to cells 
-    - First column is named **Gene** and contains the gene names
-    - Each entry is a normalized gene expression value
-- `--output_path`: String that contains the path to the output folder. Has to exist at time of execution.
-
-### Output File
-
-The output file `network.tsv` contains the differential correlation results with the following columns:
-
-- **Target:** The first gene.
-- **Regulator:** The second gene.
-- **Condition:** The condition (either `condition1_cor` or `condition2_cor`).
-- **Weight:** The correlation value.
-
-## Interpretation of the output
-
-- The nodes correspond to the genes.
-- Each edge represents diff correlation between a pair of genes in either condition 1 or condition 2.
-
-
-### Execution instructions using example data
-
-I have provided two reference datasets from the paper[2], consisting of two input files, `BRCA_normal.tsv` and `BRCA_tumor.tsv`. The dataset contains 2,000 genes and 113 samples from the TCGA database. Additionally, both of the datasets are prepossed and normalized. To run the tool using this dataset, use the following command:
-
-```bash
-docker run -v ./data:/data diffcorr-tool --input_file_1 /data/BRCA_normal.tsv --input_file_2 /data/BRCA_tumor.tsv --output_path /data
-```
-
-### References
-
-1. [Andrew T. McKenzie, et al, DGCA: A comprehensive R package for Differential Gene Correlation Analysis](https://bmcsystbiol.biomedcentral.com/articles/10.1186/s12918-016-0349-1)
-2. [Sumanta Ray, et al, CODC: a Copula-based model to identify differential coexpression](https://www.nature.com/articles/s41540-020-0137-9)
+**Column Descriptions:**
+- **Target**: Target node of the edge.
+- **Regulator**: Source node of the edge.
+- **Weight_1**: Correlation coefficient of the gene pair for the specified condition.
+- **Weight_2**: p-value of the correlation for the specified condition.
+- **Weight_3**: z-Score difference between the two conditions.
+- **Weight_4**: p-value of the z-Score difference.
+- **Weight_5**: Classification of the correlation change.

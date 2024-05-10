@@ -11,8 +11,8 @@ suppressPackageStartupMessages({
 
 # Define command line options
 option_list <- list(
-  make_option(c("--input_file_1"), type = "character", default = "", help = "Path to the TSV file containing gene expression data for the first condition (e.g., normal).", metavar = "FILE"),
-  make_option(c("--input_file_2"), type = "character", default = "", help = "Path to the TSV file containing gene expression data for the second condition (e.g., cancer).", metavar = "FILE"),
+  make_option(c("--input_file_1"), type = "character", default = "", help = "Path to the TSV file containing gene expression data for the first condition.", metavar = "FILE"),
+  make_option(c("--input_file_2"), type = "character", default = "", help = "Path to the TSV file containing gene expression data for the second condition.", metavar = "FILE"),
   make_option(c("--output_path"), type = "character", default = "", help = "Output path where the results will be saved. The results file will be named 'network.tsv'.", metavar = "DIR")
 )
 
@@ -54,13 +54,33 @@ colnames(design_matrix) <- c("condition1", "condition2")
 # Perform differential correlation analysis
 ddcor_results <- ddcorAll(inputMat = combined_data, design = design_matrix, compare = c("condition1", "condition2"))
 
-# Transform ddcor_results to match the desired output format
-formatted_results <- ddcor_results %>%
-  select(Gene1, Gene2, condition1_cor, condition2_cor) %>%
-  pivot_longer(cols = c("condition1_cor", "condition2_cor"),
-               names_to = "Condition", 
-               values_to = "Weight") %>%
-  rename(Target = Gene1, Regulator = Gene2)
+# Creating separate rows for each condition and excluding rows with NAs
+condition1_data <- ddcor_results %>%
+  mutate(
+    Condition = "condition1",
+    Weight_1 = condition1_cor,
+    Weight_2 = condition1_pVal,
+    Weight_3 = zScoreDiff,
+    Weight_4 = pValDiff,
+    Weight_5 = Classes
+  ) %>%
+  select(Target = Gene1, Regulator = Gene2, Condition, Weight_1, Weight_2, Weight_3, Weight_4, Weight_5) %>%
+  filter(!is.na(Weight_1), !is.na(Weight_2))  # Filtering out NAs
+
+condition2_data <- ddcor_results %>%
+  mutate(
+    Condition = "condition2",
+    Weight_1 = condition2_cor,
+    Weight_2 = condition2_pVal,
+    Weight_3 = zScoreDiff,
+    Weight_4 = pValDiff,
+    Weight_5 = Classes
+  ) %>%
+  select(Target = Gene2, Regulator = Gene1, Condition, Weight_1, Weight_2, Weight_3, Weight_4, Weight_5) %>%
+  filter(!is.na(Weight_1), !is.na(Weight_2))  # Filtering out NAs
+
+# Binding the data together for the final output
+formatted_results <- bind_rows(condition1_data, condition2_data)
 
 # Save the reformatted results as a TSV file
 output_file_path <- file.path(args$output_path, "network.tsv")
