@@ -1,11 +1,11 @@
 # Differential Gene Correlation Analysis (DGCA) Tool
 
 ## Brief Description
-This tool is a command-line utility designed as a wrapper around the DGCA package, facilitating Differential Gene Correlation Analysis between two conditions. It aids in identifying significant changes in gene correlation across different biological conditions, supporting advanced biological insights into gene regulatory mechanisms.
+This tool is a command-line utility designed as a wrapper around the DGCA package, facilitating Differential Gene Correlation Analysis between two conditions. It is designed to identifying significant changes in gene correlation across different biological conditions, thus providing deeper understanding of gene regulatory dynamics.
 
 ## Reference
-For detailed methodology and application, please refer to:
-McKenzie, A.T., Katsyv, I., Song, WM. et al. DGCA: A comprehensive R package for Differential Gene Correlation Analysis. BMC Syst Biol 10, 106 (2016). https://doi.org/10.1186/s12918-016-0349-1.
+For detailed methodology and application, Please find the article here:
+McKenzie, A.T., Katsyv, I., Song, WM. et al. DGCA: A comprehensive R package for Differential Gene Correlation Analysis. BMC System Biology, Article num: 106 (2016). https://bmcsystbiol.biomedcentral.com/articles/10.1186/s12918-016-0349-1.
 
 ## Installation Instructions
 
@@ -13,8 +13,8 @@ McKenzie, A.T., Katsyv, I., Song, WM. et al. DGCA: A comprehensive R package for
 To run the tool using Docker, ensure Docker is installed on your system and follow these steps:
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/dgca-tool.git
-   cd dgca-tool
+   git clone git@github.com:bionetslab/grn-benchmark.git
+   cd grn-benchmark/dgca-tool
    ```
 2. Build the Docker image:
    ```bash
@@ -22,14 +22,16 @@ To run the tool using Docker, ensure Docker is installed on your system and foll
    ```
 3. Run the tool using the Docker container:
    ```bash
-   docker run --rm -v ./data:/data dgca-tool --input_file_1 /data/BRCA_normal_subset.tsv --input_file_2 /data/BRCA_tumor_subset.tsv --output_path /data
+   docker run --rm -v /<path_to_your_data>:/data dgca-tool --input_file_1 /data/condition1.tsv --input_file_2 /data/condition2.tsv --output_path /data
    ```
+
+Replace <path_to_your_data> with the directory address where the datasets are kept.
 
 ### Option 2: Local Installation (Using R)
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/dgca-tool.git
-   cd dgca-tool
+   git clone git@github.com:bionetslab/grn-benchmark.git
+   cd grn-benchmark/dgca-tool
    ```
 2. Install the required R packages:
    ```bash
