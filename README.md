@@ -12,8 +12,6 @@
 - [Parameters](#parameters)
 - [Input File Format](#input-file-format)
 - [Output File Format](#output-file-format)
-- [Contributing](#contributing)
-- [License](#license)
 
 </details>
 
@@ -27,7 +25,7 @@ McKenzie, A.T., Katsyv, I., Song, WM. et al. DGCA: A comprehensive R package for
 ## Available Commands
 The CLI includes commands for:
 - Differential Correlation Analysis (dgca.R)
-- [Enrichment Map (enrichment_map.R)](downstream/enrichment-map.md)
+- [Enrichment Map (enrichment_map.R)](downstream_analysis/enrichment-map.md)
 
 In this readme, we will see the usage of dgca.R
 
