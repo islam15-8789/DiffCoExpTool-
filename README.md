@@ -1,63 +1,65 @@
+Here's a revised `README.md` for the DGCA tool that incorporates a collapsible Table of Contents and organizes the content in a manner similar to your CODC project README:
+
+```markdown
 # Differential Gene Correlation Analysis (DGCA) Tool
 
+<details>
+<summary>Table of Contents</summary>
+
+- [Brief Description](#brief-description)
+- [Reference](#reference)
+- [Installation Instructions](#installation-instructions)
+  - [Using Docker](#using-docker)
+  - [Using Locally](#using-locally)
+- [Parameters](#parameters)
+- [Input File Format](#input-file-format)
+- [Output File Format](#output-file-format)
+- [Contributing](#contributing)
+- [License](#license)
+
+</details>
+
 ## Brief Description
-This tool is a command-line utility designed as a wrapper around the DGCA package, facilitating Differential Gene Correlation Analysis between two conditions. It is designed to identifying significant changes in gene correlation across different biological conditions, thus providing deeper understanding of gene regulatory dynamics and advanced biological insights .
+This tool is a command-line utility designed as a wrapper around the DGCA package, facilitating Differential Gene Correlation Analysis between two conditions. It aids in identifying significant changes in gene correlation across different biological conditions, supporting advanced biological insights into gene regulatory mechanisms.
 
 ## Reference
-For detailed methodology and application, Please find the article here:
-McKenzie, A.T., Katsyv, I., Song, WM. et al. DGCA: A comprehensive R package for Differential Gene Correlation Analysis. BMC System Biology, 106 (2016). https://bmcsystbiol.biomedcentral.com/articles/10.1186/s12918-016-0349-1.
+For detailed methodology and application, please refer to:
+McKenzie, A.T., Katsyv, I., Song, WM. et al. DGCA: A comprehensive R package for Differential Gene Correlation Analysis. BMC Syst Biol 10, 106 (2016). [https://doi.org/10.1186/s12918-016-0349-1](https://doi.org/10.1186/s12918-016-0349-1).
+
+## Available Commands
+The CLI includes commands for:
+- Differential Correlation Analysis (dgca.R)
+- [Enrichment Map (enrichmentmap.R)](downstream-analysis/enrichment-map.md)
+
+In this readme, we will see the usage of dgca.R
 
 ## Installation Instructions
 
-### Option 1: Docker Installation
+### Using Docker
 To run the tool using Docker, ensure Docker is installed on your system and follow these steps:
-1. Clone the repository:
-   ```bash
-   git clone git@github.com:bionetslab/grn-benchmark.git
-   cd grn-benchmark/dgca-tool
-   ```
+
+1. Navigate to the project (dgca-tool) root directory.
+
 2. Build the Docker image:
    ```bash
    docker build -t dgca-tool .
    ```
 3. Run the tool using the Docker container:
    ```bash
-   docker run --rm -v /<path_to_your_data>:/data dgca-tool dgca.R --input_file_1 /data/condition1.tsv --input_file_2 /data/condition2.tsv --output_path /data
+   docker run --rm -v ./data:/data dgca-tool dgca.R --input_file_1 /data/BRCA_normal.tsv --input_file_2 /data/BRCA_tumor.tsv --output_path /data
    ```
 
-Replace <path_to_your_data> with the directory path where the datasets are kept.
+### Using Locally (Using R)
+1. Navigate to the project (dgca-tool) root directory.
 
-### Option 2: Local Installation (Using R)
-1. Clone the repository:
-   ```bash
-   git clone git@github.com:bionetslab/grn-benchmark.git
-   cd grn-benchmark/dgca-tool
-   ```
 2. Install the required R packages:
    ```bash
    Rscript install_dependencies.R
    ```
 3. Run the tool:
    ```bash
-   Rscript dgca.R --input_file_1 <path_to_condition1_file> --input_file_2 <path_to_condition2_file> --output_path <output_directory>
+   Rscript dgca.R --input_file_1 /data/BRCA_normal.tsv --input_file_2 /data/BRCA_tumor.tsv --output_path ./data
    ```
-
-## Instructions to execute the reference data
-To run the tool, use the following command:
-```bash
-# 500 genes
-Rscript dgca.R --input_file_1 ../../data/reference_datasets/500_genes/out_CD8_exhausted.tsv --input_file_2 ../../data/reference_datasets/500_genes/out_Macrophages.tsv --output_path ./
-
-# 1000 genes
-Rscript dgca.R --input_file_1 ../../reference_datasets/1000_genes/out_CD8_exhausted.tsv --input_file_2 ../../reference_datasets/1000_genes/out_Macrophages.tsv --output_path ./
-
-# 2500 genes
-Rscript dgca.R --input_file_1 ../../reference_datasets/2500_genes/out_CD8_exhausted.tsv --input_file_2 ../../reference_datasets/2500_genes/out_Macrophages.tsv --output_path ./
-
-# Full Input
-Rscript dgca.R --input_file_1 ../../reference_datasets/full_input/out_CD8_exhausted.tsv --input_file_2 ../../reference_datasets/full_input/out_Macrophages.tsv --output_path ./
-```
-Replace the paths with the actual locations of your input files and desired output directory.
 
 ## Parameters
 - `--input_file_1`: Path to the TSV file containing gene expression data for the first condition.
