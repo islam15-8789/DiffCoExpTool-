@@ -1,6 +1,3 @@
-Here's a revised `README.md` for the DGCA tool that incorporates a collapsible Table of Contents and organizes the content in a manner similar to your CODC project README:
-
-```markdown
 # Differential Gene Correlation Analysis (DGCA) Tool
 
 <details>
