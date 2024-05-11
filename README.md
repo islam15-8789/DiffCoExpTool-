@@ -5,6 +5,7 @@
 
 - [Brief Description](#brief-description)
 - [Reference](#reference)
+- [Available Commands](#available-commands)
 - [Installation Instructions](#installation-instructions)
   - [Using Docker](#using-docker)
   - [Using Locally](#using-locally)
@@ -26,7 +27,7 @@ McKenzie, A.T., Katsyv, I., Song, WM. et al. DGCA: A comprehensive R package for
 ## Available Commands
 The CLI includes commands for:
 - Differential Correlation Analysis (dgca.R)
-- [Enrichment Map (enrichmentmap.R)](downstream-analysis/enrichment-map.md)
+- [Enrichment Map (enrichment_map.R)](downstream/enrichment-map.md)
 
 In this readme, we will see the usage of dgca.R
 
