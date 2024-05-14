@@ -81,13 +81,11 @@ The input files should be TSV (Tab-Separated Values) format containing gene expr
 - **Weight\_2 (P-values for Correlations)**: Determines the statistical significance of the correlation coefficients, indicating the likelihood of observing the calculated correlations by chance under the null hypothesis of no association \cite{dgca}.
   
 - **Weight\_3 (Z-Score Differences)**: Emphasizes the extent of variation in the correlation between two gene expressions across different conditions. It quantifies how much the relationship between these genes changes from one condition to another. The z-score difference is derived using the Fisher z-transformation, which normalizes the variance of correlation coefficients \cite{dgca}:
-  $
-  z = \frac{1}{2} \log_e \left(\frac{1+r}{1-r}\right)
-  $
-  where $ r $ is the correlation coefficient, and $\log_e  is the natural logarithm. The z-score difference is calculated as:
-  $
-  dz = \frac{(z_1 - z_2)}{\sqrt{|s_{z_1}^2 - s_{z_2}^2|}}
-  $
+  
+  $z = \frac{1}{2} \log_e \left(\frac{1+r}{1-r}\right)$
+
+  where $r$ is the correlation coefficient, and $\log_e$  is the natural logarithm. The z-score difference is calculated as:
+  $dz = \frac{(z_1 - z_2)}{\sqrt{|s_{z_1}^2 - s_{z_2}^2|}}$
   where $s_{z_x}^2$ represents the variance of the z-score in condition $x$.
   
 - **Weight\_4 (P-values of the Z-Score Differences)**: Assesses the significance of the differences between the z-scores of two conditions using p-values.
