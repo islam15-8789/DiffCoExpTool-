@@ -1,4 +1,4 @@
-# Differential Gene Correlation Analysis (DGCA) Tool
+# Differential Gene Correlation Analysis Command-line Tool (DGCA CLI Tool)
 
 <details>
 <summary>Table of Contents</summary>
@@ -66,16 +66,30 @@ To run the tool using Docker, ensure Docker is installed on your system and foll
 The input files should be TSV (Tab-Separated Values) format containing gene expression data. Each file must have genes as rows and samples as columns for each condition.
 
 ## Output File Format
+
 | Target  | Regulator | Condition    | Weight_1      | Weight_2   | Weight_3     | Weight_4     | Weight_5 |
 |---------|-----------|--------------|---------------|------------|--------------|--------------|----------|
 | CACYBP  | NACA      | condition1   | -0.070261455  | 0.67509118 | 1.100991e-24 | 1.100991e-24 | 0/+      |
 | CACYBP  | NACA      | condition2   | 0.9567267     | 0          | 1.100991e-24 | 1.100991e-24 | 0/+      |
 
-**Column Descriptions:**
+### Column Descriptions:
+
 - **Target**: Target node of the edge.
 - **Regulator**: Source node of the edge.
-- **Weight_1**: Correlation coefficient of the gene pair for the specified condition.
-- **Weight_2**: p-value of the correlation for the specified condition.
-- **Weight_3**: z-Score difference between the two conditions.
-- **Weight_4**: p-value of the z-Score difference.
-- **Weight_5**: Classification of the correlation change.
+- **Weight_1 (Correlation Coefficients)**: Quantifies the strength and direction of the linear relationship between two genes within specified conditions. Depending on the distribution assumption, either the Pearson product-moment correlation coefficient (\( r_p \)) or the Spearman’s rank correlation coefficient (\( r_s \)) is used \cite{dgca}.
+  
+- **Weight_2 (P-values for Correlations)**: Determines the statistical significance of the correlation coefficients, indicating the likelihood of observing the calculated correlations by chance under the null hypothesis of no association \cite{dgca}.
+  
+- **Weight_3 (Z-Score Differences)**: Emphasizes the extent of variation in the correlation between two gene expressions across different conditions. It quantifies how much the relationship between these genes changes from one condition to another. The z-score difference is derived using the Fisher z-transformation, which normalizes the variance of correlation coefficients \cite{dgca}:
+  \[
+  z = \frac{1}{2} \log_e \left(\frac{1+r}{1-r}\right)
+  \]
+  where \( r \) is the correlation coefficient, and \( \log_e \) is the natural logarithm. The z-score difference is calculated as:
+  \[
+  dz = \frac{(z_1 - z_2)}{\sqrt{|s_{z_1}^2 - s_{z_2}^2|}}
+  \]
+  where \( s_{z_x}^2 \) represents the variance of the z-score in condition \( x \).
+  
+- **Weight_4 (P-values of the Z-Score Differences)**: Assesses the significance of the differences between the z-scores of two conditions using p-values.
+  
+- **Weight_5 (Classifications of the Correlation Change)**: Evaluates whether gene pairs experience a gain or loss of correlation between two conditions. This classification further categorizes these changes based on their statistical significance and the directionality (positive or negative) of the correlation \cite{dgca}.
